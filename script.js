@@ -1,49 +1,120 @@
-const prices = {
-  BTC: 192450,
-  ETH: 11230,
-  SOL: 890
+/* Começa o JavaScript */
+
+const USD_BRL = 5.5;
+
+const PRICES = {
+  BTC: 104500,
+  ETH: 3850,
+  USDT: 1.0,
+  BNB: 690,
+  SOL: 172,
+  LINK: 18.5,
+  UNI: 14.2,
+  HYPE: 28.5,
 };
 
-let portfolio = [];
+const CRYPTO_LIST = [
+  { symbol: "BTC", name: "Bitcoin" },
+  { symbol: "ETH", name: "Ethereum" },
+  { symbol: "USDT", name: "Tether" },
+  { symbol: "BNB", name: "BNB" },
+  { symbol: "SOL", name: "Solana" },
+  { symbol: "LINK", name: "Chainlink" },
+  { symbol: "UNI", name: "Uniswap" },
+  { symbol: "HYPE", name: "Hyperliquid" },
+];
 
-function addTransaction() {
-  const asset = document.getElementById("asset").value;
-  const quantity = parseFloat(document.getElementById("quantity").value);
-  const price = parseFloat(document.getElementById("price").value);
+// Aqui você define as lições (LESSONS) e outras funções do app, veja a estrutura para organizar
 
-  if (!quantity || !price) return alert("Preencha tudo");
+let state = {
+  mainTab: "learn",
+  currentLesson: null,
+  quizActive: false,
+  quizQuestionIndex: 0,
+  quizScore: 0,
+  quizAnswers: [],
+  quizShowResult: false,
+  completedLessons: [],
+  xp: 0,
+  wallets: [],
+  activeWallet: null,
+  walletTab: "transactions",
+  showNewWallet: false,
+  showTxForm: false,
+  editingTxId: null,
+  // mais estados necessários
+};
 
-  portfolio.push({ asset, quantity, price });
+// Função para salvar estado no localStorage
+function saveState() {
+  localStorage.setItem(
+    "cryptoLearnData",
+    JSON.stringify({
+      completedLessons: state.completedLessons,
+      xp: state.xp,
+      wallets: state.wallets,
+    })
+  );
+}
 
+// Função para carregar estado do localStorage
+function loadState() {
+  const saved = localStorage.getItem("cryptoLearnData");
+  if (saved) {
+    const d = JSON.parse(saved);
+    state.completedLessons = d.completedLessons || [];
+    state.xp = d.xp || 0;
+    state.wallets = d.wallets || [];
+  }
+}
+
+// Função para atualizar display de XP e nível
+function updateXPDisplay() {
+  const level = Math.floor(state.xp / 100) + 1;
+  document.getElementById("xpLevel").textContent = `Nível ${level}`;
+  document.getElementById("xpValue").textContent = `${state.xp} XP`;
+}
+
+// Função para mudar abas principais
+function switchMainTab(tab) {
+  state.mainTab = tab;
+  state.currentLesson = null;
+  state.quizActive = false;
+  state.quizShowResult = false;
+  document.getElementById("tabLearn").classList.toggle("active", tab === "learn");
+  document.getElementById("tabPortfolio").classList.toggle("active", tab === "portfolio");
   render();
 }
 
+// Render principal, chama funções específicas
 function render() {
-  const list = document.getElementById("list");
-  list.innerHTML = "";
+  updateXPDisplay();
+  const content = document.getElementById("content");
 
-  let invested = 0;
-  let current = 0;
-
-  portfolio.forEach(item => {
-    const currentPrice = prices[item.asset];
-
-    const investedValue = item.quantity * item.price;
-    const currentValue = item.quantity * currentPrice;
-
-    invested += investedValue;
-    current += currentValue;
-
-    const li = document.createElement("li");
-    li.innerText = `${item.asset} - R$ ${currentValue.toFixed(2)}`;
-    list.appendChild(li);
-  });
-
-  const profit = ((current - invested) / invested) * 100 || 0;
-
-  document.getElementById("total").innerText =
-    "R$ " + current.toFixed(2);
-
-  document.getElementById("profit").innerText =
-    profit.toFixed(2) + "%";
+  if (state.mainTab === "learn") {
+    if (state.currentLesson) {
+      renderLesson(content);
+    } else {
+      renderLessonList(content);
+    }
+  } else if (state.mainTab === "portfolio") {
+    renderPortfolio(content);
+  }
 }
+
+/* 
+-- Aqui vão as funções como renderLessonList, renderLesson, renderQuiz, renderQuizResult, renderPortfolio 
+-- Que tratam os elementos da interface, formulários, listas, gráficos, etc.
+-- Também terão funções para adicionar, editar e excluir transações na carteira, calculando preço médio, conversão de BRL para USD usando a cotação fixa (dividindo os valores inputados em BRL por 5.5) para todas as análises.
+-- E chamar saveState() após mudanças.
+*/
+
+/* Exemplo simples para iniciar */
+window.onload = () => {
+  loadState();
+  render();
+};
+
+/* E aqui pode ter os event handlers para formulários, botões e etc */
+
+/* Final do JavaScript */
