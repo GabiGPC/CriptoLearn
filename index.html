@@ -1,49 +1,47 @@
-const prices = {
-  BTC: 192450,
-  ETH: 11230,
-  SOL: 890
-};
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CryptoLearn</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-let portfolio = [];
+<!-- Celebration Overlay -->
+<div id="celebration" class="celebration-overlay hidden">
+  <div class="celebration-content">
+    <div class="celebration-emoji">🎉</div>
+    <h2 class="celebration-title">Parabéns!</h2>
+    <p class="celebration-msg">+50 XP conquistados!</p>
+  </div>
+</div>
 
-function addTransaction() {
-  const asset = document.getElementById("asset").value;
-  const quantity = parseFloat(document.getElementById("quantity").value);
-  const price = parseFloat(document.getElementById("price").value);
+<!-- Header -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div>
+        <div class="logo">CryptoLearn</div>
+        <div class="logo-sub">Aprenda e acompanhe seus investimentos</div>
+      </div>
+      <div class="xp-box">
+        <div class="xp-level" id="xpLevel">Nível 1</div>
+        <div class="xp-value" id="xpValue">0 XP</div>
+      </div>
+    </div>
+    <div class="main-tabs">
+      <button class="main-tab active" id="tabLearn" onclick="switchMainTab('learn')">📚 Aprender</button>
+      <button class="main-tab" id="tabPortfolio" onclick="switchMainTab('portfolio')">💼 Carteira</button>
+    </div>
+  </div>
+</div>
 
-  if (!quantity || !price) return alert("Preencha tudo");
+<!-- Main Content -->
+<div class="content" id="content"></div>
 
-  portfolio.push({ asset, quantity, price });
-
-  render();
-}
-
-function render() {
-  const list = document.getElementById("list");
-  list.innerHTML = "";
-
-  let invested = 0;
-  let current = 0;
-
-  portfolio.forEach(item => {
-    const currentPrice = prices[item.asset];
-
-    const investedValue = item.quantity * item.price;
-    const currentValue = item.quantity * currentPrice;
-
-    invested += investedValue;
-    current += currentValue;
-
-    const li = document.createElement("li");
-    li.innerText = `${item.asset} - R$ ${currentValue.toFixed(2)}`;
-    list.appendChild(li);
-  });
-
-  const profit = ((current - invested) / invested) * 100 || 0;
-
-  document.getElementById("total").innerText =
-    "R$ " + current.toFixed(2);
-
-  document.getElementById("profit").innerText =
+<script src="app.js"></script>
+</body>
+</html>
     profit.toFixed(2) + "%";
 }
