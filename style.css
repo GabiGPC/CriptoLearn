@@ -306,19 +306,35 @@ body {
 .qfb.ok   { background: #00e67610; color: var(--green); }
 .qfb.fail { background: #ff525210; color: var(--red); }
 .next-btn {
-  width: 100%;
-  margin-top: 14px;
-  padding: 13px;
+  position: fixed;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 460px;
+  padding: 15px;
   background: var(--purple);
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   font-size: 15px;
   font-weight: 500;
   color: #fff;
   cursor: pointer;
-  display: none;
+  z-index: 100;
+  box-shadow: 0 -4px 24px rgba(124, 92, 252, 0.4);
+  transition: bottom 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.next-btn.show { display: block; }
+.next-btn.show {
+  bottom: 24px;
+}
+.next-btn-spacer {
+  display: none;
+  height: 80px;
+  margin-top: 14px;
+}
+.next-btn-spacer.show {
+  display: block;
+}
 
 /* WALLET */
 .wallet-topbar {
