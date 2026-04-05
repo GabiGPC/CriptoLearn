@@ -32,28 +32,24 @@ body {
   flex-direction: column;
 }
 
-/* ─── HEADER ─── */
+/* HEADER */
 .hdr {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px 0;
 }
-
 .logo {
   font-size: 18px;
   font-weight: 500;
 }
-
 .logo span {
   color: var(--purple2);
 }
-
 .hdr-pills {
   display: flex;
   gap: 8px;
 }
-
 .pill {
   display: flex;
   align-items: center;
@@ -65,18 +61,16 @@ body {
   font-size: 12px;
   font-weight: 500;
 }
-
 .pill.xp {
   color: var(--purple2);
 }
 
-/* ─── TABS ─── */
+/* TABS */
 .tabs {
   display: flex;
   padding: 14px 20px 0;
   border-bottom: 1px solid var(--border);
 }
-
 .tab {
   padding: 10px 16px;
   font-size: 13px;
@@ -87,24 +81,21 @@ body {
   margin-bottom: -1px;
   transition: all 0.2s;
 }
-
 .tab.active {
   color: var(--purple2);
   border-bottom-color: var(--purple);
 }
 
-/* ─── SCREENS ─── */
+/* SCREENS */
 .screen {
   display: none;
   flex: 1;
   padding: 20px 20px 80px;
   overflow-y: auto;
 }
-
 .screen.active {
   display: block;
 }
-
 .sec-label {
   font-size: 10px;
   letter-spacing: 1.5px;
@@ -113,46 +104,40 @@ body {
   margin-bottom: 10px;
 }
 
-/* ─── CARD ─── */
+/* CARD */
 .card {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 16px;
 }
-
 .card + .card {
   margin-top: 12px;
 }
 
-/* ─── LEARN TRAIL ─── */
+/* LEARN */
 .xp-bar-wrap {
   margin-bottom: 20px;
 }
-
 .xp-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 6px;
 }
-
 .xp-row span {
   font-size: 12px;
   color: var(--muted);
 }
-
 .xp-row strong {
   font-size: 12px;
   color: var(--purple2);
 }
-
 .xp-bar {
   height: 4px;
   background: var(--bg3);
   border-radius: 2px;
 }
-
 .xp-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--purple), var(--purple2));
@@ -160,6 +145,7 @@ body {
   transition: width 0.4s;
 }
 
+/* MODULE CARDS */
 .mod-card {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -172,20 +158,16 @@ body {
   cursor: pointer;
   transition: border-color 0.2s;
 }
-
 .mod-card:hover {
   border-color: var(--purple);
 }
-
 .mod-card.locked {
   opacity: 0.4;
   cursor: not-allowed;
 }
-
 .mod-card.done {
   border-color: #00e67633;
 }
-
 .mod-icon {
   width: 42px;
   height: 42px;
@@ -196,22 +178,18 @@ body {
   font-size: 20px;
   flex-shrink: 0;
 }
-
 .mod-meta {
   flex: 1;
 }
-
 .mod-title {
   font-size: 14px;
   font-weight: 500;
 }
-
 .mod-sub {
   font-size: 11px;
   color: var(--muted);
   margin-top: 2px;
 }
-
 .mod-badge {
   font-size: 10px;
   padding: 3px 9px;
@@ -219,26 +197,23 @@ body {
   font-weight: 500;
   flex-shrink: 0;
 }
-
 .badge-done {
   background: #00e67615;
   color: var(--green);
   border: 1px solid #00e67630;
 }
-
 .badge-new {
   background: #7c5cfc15;
   color: var(--purple2);
   border: 1px solid #7c5cfc30;
 }
-
 .badge-lock {
   background: var(--bg3);
   color: var(--muted);
   border: 1px solid var(--border);
 }
 
-/* ─── LESSON VIEW ─── */
+/* LESSON */
 .back-btn {
   display: flex;
   align-items: center;
@@ -250,26 +225,22 @@ body {
   border: none;
   margin-bottom: 20px;
 }
-
 .lesson-icon {
   font-size: 36px;
   display: block;
   margin-bottom: 12px;
 }
-
 .lesson-title {
   font-size: 20px;
   font-weight: 500;
   margin-bottom: 10px;
 }
-
 .lesson-body {
   font-size: 14px;
   color: #94a3b8;
   line-height: 1.75;
   margin-bottom: 16px;
 }
-
 .lesson-hl {
   background: #7c5cfc12;
   border-left: 3px solid var(--purple);
@@ -281,6 +252,7 @@ body {
   line-height: 1.65;
 }
 
+/* QUIZ */
 .quiz-box {
   background: var(--bg3);
   border: 1px solid var(--border);
@@ -288,19 +260,16 @@ body {
   padding: 16px;
   margin-top: 16px;
 }
-
 .quiz-q {
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 12px;
 }
-
 .quiz-opts {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-
 .qopt {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -312,24 +281,20 @@ body {
   text-align: left;
   transition: all 0.2s;
 }
-
 .qopt:hover {
   border-color: var(--purple);
   color: var(--text);
 }
-
 .qopt.correct {
   background: #00e67610;
   border-color: var(--green);
   color: var(--green);
 }
-
 .qopt.wrong {
   background: #ff525210;
   border-color: var(--red);
   color: var(--red);
 }
-
 .qfb {
   margin-top: 10px;
   font-size: 13px;
@@ -337,58 +302,35 @@ body {
   border-radius: 8px;
   display: none;
 }
-
 .qfb.show { display: block; }
 .qfb.ok   { background: #00e67610; color: var(--green); }
 .qfb.fail { background: #ff525210; color: var(--red); }
-
 .next-btn {
-  position: fixed;
-  bottom: -80px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 40px);
-  max-width: 460px;
-  padding: 15px;
+  width: 100%;
+  margin-top: 14px;
+  padding: 13px;
   background: var(--purple);
   border: none;
-  border-radius: 14px;
+  border-radius: 12px;
   font-size: 15px;
   font-weight: 500;
   color: #fff;
   cursor: pointer;
-  z-index: 100;
-  box-shadow: 0 -4px 24px rgba(124, 92, 252, 0.35);
-  transition: bottom 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.next-btn.show {
-  bottom: 24px;
-}
-
-.next-btn-spacer {
   display: none;
-  height: 72px;
-  margin-top: 14px;
 }
+.next-btn.show { display: block; }
 
-.next-btn-spacer.show {
-  display: block;
-}
-
-/* ─── WALLET ─── */
+/* WALLET */
 .wallet-topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 14px;
 }
-
 .wallet-topbar h2 {
   font-size: 17px;
   font-weight: 500;
 }
-
 .btn-primary {
   padding: 9px 18px;
   background: var(--purple);
@@ -399,10 +341,7 @@ body {
   font-weight: 500;
   cursor: pointer;
 }
-
-.btn-primary:hover {
-  background: #6d4de8;
-}
+.btn-primary:hover { background: #6d4de8; }
 
 .w-item {
   background: var(--bg2);
@@ -413,32 +352,14 @@ body {
   cursor: pointer;
   transition: border-color 0.2s;
 }
-
-.w-item:hover {
-  border-color: var(--purple);
-}
-
-.w-name {
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.w-meta {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 3px;
-}
-
-.w-perf {
-  font-size: 13px;
-  font-weight: 500;
-  margin-top: 8px;
-}
-
+.w-item:hover { border-color: var(--purple); }
+.w-name { font-size: 15px; font-weight: 500; }
+.w-meta { font-size: 12px; color: var(--muted); margin-top: 3px; }
+.w-perf { font-size: 13px; font-weight: 500; margin-top: 8px; }
 .pos { color: var(--green); }
 .neg { color: var(--red); }
 
-/* ─── SUBTABS ─── */
+/* SUBTABS */
 .stabs {
   display: flex;
   background: var(--bg3);
@@ -446,7 +367,6 @@ body {
   padding: 4px;
   margin-bottom: 20px;
 }
-
 .stab {
   flex: 1;
   padding: 9px 0;
@@ -459,21 +379,19 @@ body {
   color: var(--muted);
   transition: all 0.2s;
 }
-
 .stab.active {
   background: var(--bg2);
   color: var(--purple2);
   border: 1px solid var(--border);
 }
 
-/* ─── FORM INPUTS ─── */
+/* FORM */
 .field-label {
   font-size: 11px;
   color: var(--muted);
   margin-bottom: 5px;
   letter-spacing: 0.5px;
 }
-
 .finput {
   width: 100%;
   background: var(--bg3);
@@ -485,22 +403,15 @@ body {
   margin-bottom: 12px;
   outline: none;
 }
-
-.finput:focus {
-  border-color: var(--purple);
-}
-
-.finput::placeholder {
-  color: #2e3452;
-}
-
+.finput:focus { border-color: var(--purple); }
+.finput::placeholder { color: #2e3452; }
 .row2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
 
-/* ─── TRANSACTION CARDS ─── */
+/* TX CARDS */
 .tx-card {
   background: var(--bg3);
   border: 1px solid var(--border);
@@ -508,19 +419,16 @@ body {
   padding: 14px;
   margin-bottom: 8px;
 }
-
 .tx-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
-
 .tx-coin-info {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
 .coin-avatar {
   width: 36px;
   height: 36px;
@@ -535,39 +443,17 @@ body {
   color: #fff;
   flex-shrink: 0;
 }
-
-.tx-cname {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.tx-cmeta {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 2px;
-}
-
-.tx-right {
-  text-align: right;
-}
-
-.tx-val {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.tx-pct {
-  font-size: 11px;
-  margin-top: 2px;
-}
-
+.tx-cname { font-size: 14px; font-weight: 500; }
+.tx-cmeta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.tx-right { text-align: right; }
+.tx-val { font-size: 14px; font-weight: 500; }
+.tx-pct { font-size: 11px; margin-top: 2px; }
 .tx-actions {
   display: flex;
   gap: 6px;
   margin-top: 10px;
   justify-content: flex-end;
 }
-
 .act-btn {
   padding: 5px 12px;
   border-radius: 8px;
@@ -578,45 +464,18 @@ body {
   background: transparent;
   transition: all 0.2s;
 }
-
 .act-edit { color: var(--purple2); }
 .act-edit:hover { border-color: var(--purple); background: #7c5cfc15; }
-
 .act-del { color: var(--red); }
 .act-del:hover { border-color: var(--red); background: #ff525215; }
+.tx-date { font-size: 10px; color: var(--muted); margin-top: 6px; }
 
-.tx-date {
-  font-size: 10px;
-  color: var(--muted);
-  margin-top: 6px;
-}
-
-/* ─── PERFORMANCE CHART ─── */
-.perf-header {
-  margin-bottom: 20px;
-}
-
-.perf-pct {
-  font-size: 28px;
-  font-weight: 500;
-  margin-bottom: 2px;
-}
-
-.perf-sub {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.bar-section {
-  margin-bottom: 8px;
-}
-
-.bar-lbl {
-  font-size: 11px;
-  color: var(--muted);
-  margin-bottom: 5px;
-}
-
+/* CHART */
+.perf-header { margin-bottom: 20px; }
+.perf-pct { font-size: 28px; font-weight: 500; margin-bottom: 2px; }
+.perf-sub { font-size: 12px; color: var(--muted); }
+.bar-section { margin-bottom: 8px; }
+.bar-lbl { font-size: 11px; color: var(--muted); margin-bottom: 5px; }
 .bar-track {
   height: 54px;
   background: var(--bg3);
@@ -625,7 +484,6 @@ body {
   display: flex;
   align-items: center;
 }
-
 .bar-fill {
   height: 100%;
   border-radius: 10px;
@@ -635,56 +493,27 @@ body {
   min-width: 60px;
   transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .bar-invested { background: linear-gradient(90deg, #1a2255, #243080); }
 .bar-profit   { background: linear-gradient(90deg, #0a3320, #0d5c34); }
 .bar-loss     { background: linear-gradient(90deg, #3a0a0a, #6b1010); }
-
-.bar-val {
-  font-size: 13px;
-  font-weight: 500;
-  color: #e2e8f0;
-  white-space: nowrap;
-}
-
-.bar-legend {
-  display: flex;
-  gap: 14px;
-  margin-top: 10px;
-}
-
-.leg-item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 11px;
-  color: var(--muted);
-}
-
-.leg-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
-}
-
+.bar-val { font-size: 13px; font-weight: 500; color: #e2e8f0; white-space: nowrap; }
+.bar-legend { display: flex; gap: 14px; margin-top: 10px; }
+.leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+.leg-dot { width: 10px; height: 10px; border-radius: 3px; }
 .leg-invested { background: #243080; }
 .leg-profit   { background: #0d5c34; }
 .leg-loss     { background: #6b1010; }
 
-/* ─── EMPTY STATE ─── */
+/* EMPTY STATE */
 .empty-state {
   text-align: center;
   padding: 36px 20px;
   color: var(--muted);
   font-size: 14px;
 }
+.empty-icon { font-size: 28px; margin-bottom: 8px; }
 
-.empty-icon {
-  font-size: 28px;
-  margin-bottom: 8px;
-}
-
-/* ─── ADD TX BUTTON ─── */
+/* ADD TX BTN */
 .add-tx-btn {
   width: 100%;
   padding: 13px;
@@ -697,13 +526,9 @@ body {
   margin-top: 8px;
   transition: all 0.2s;
 }
+.add-tx-btn:hover { border-color: var(--purple); color: var(--purple2); }
 
-.add-tx-btn:hover {
-  border-color: var(--purple);
-  color: var(--purple2);
-}
-
-/* ─── MODALS ─── */
+/* MODALS */
 .modal-bg {
   display: none;
   position: fixed;
@@ -713,11 +538,7 @@ body {
   align-items: flex-end;
   justify-content: center;
 }
-
-.modal-bg.open {
-  display: flex;
-}
-
+.modal-bg.open { display: flex; }
 .modal {
   background: var(--bg2);
   border-radius: 20px 20px 0 0;
@@ -730,19 +551,8 @@ body {
   max-height: 92vh;
   overflow-y: auto;
 }
-
-.modal h3 {
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 18px;
-}
-
-.m-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 4px;
-}
-
+.modal h3 { font-size: 16px; font-weight: 500; margin-bottom: 18px; }
+.m-actions { display: flex; gap: 10px; margin-top: 4px; }
 .m-cancel {
   flex: 1;
   padding: 12px;
@@ -753,7 +563,6 @@ body {
   font-size: 14px;
   cursor: pointer;
 }
-
 .m-save {
   flex: 2;
   padding: 12px;
