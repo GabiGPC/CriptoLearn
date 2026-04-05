@@ -203,9 +203,10 @@ function openLesson(id) {
     optsHtml += "<button class='qopt" + cls + "' onclick='answerQ(" + id + "," + j + ")'>" + l.quiz.opts[j] + "</button>";
   }
 
-  var fbHtml = done ? "<div class='qfb show ok'>Correto! " + l.quiz.fb + "</div>" : "<div class='qfb' id='qfb'></div>";
-  var nextLabel = id < LESSONS.length - 1 ? "Próximo módulo" : "Trilha concluída!";
-  var nextHtml = "<button class='next-btn" + (done ? " show" : "") + "' id='next-btn' onclick='nextLesson(" + id + ")'>" + nextLabel + "</button>";
+  var fbHtml = done ? "<div class='qfb show ok'>" + l.quiz.fb + "</div>" : "<div class='qfb' id='qfb'></div>";
+  var nextLabel = id < LESSONS.length - 1 ? "Próximo módulo" : "🎉 Trilha concluída!";
+  var spacerClass = done ? "next-btn-spacer show" : "next-btn-spacer";
+  var nextHtml = "<button class='next-btn" + (done ? " show" : "") + "' id='next-btn' onclick='nextLesson(" + id + ")'>" + nextLabel + "</button><div class='" + spacerClass + "' id='next-btn-spacer'></div>";
 
   document.getElementById("lesson-content").innerHTML =
     l.content +
@@ -230,7 +231,7 @@ function answerQ(lid, chosen) {
   var fb = document.getElementById("qfb");
   if (fb) {
     fb.className = "qfb show " + (ok ? "ok" : "fail");
-    fb.textContent = ok ? "Correto! " + l.quiz.fb : "Não exatamente. A resposta correta está em verde.";
+    fb.textContent = ok ? l.quiz.fb : "Não exatamente. A resposta correta está em verde.";
   }
 
   if (ok) {
@@ -239,6 +240,8 @@ function answerQ(lid, chosen) {
     save();
     var btn = document.getElementById("next-btn");
     if (btn) btn.className = "next-btn show";
+    var spacer = document.getElementById("next-btn-spacer");
+    if (spacer) spacer.className = "next-btn-spacer show";
   }
 }
 
