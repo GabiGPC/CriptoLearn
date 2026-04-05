@@ -1,681 +1,767 @@
-// ─── DATA ───────────────────────────────────────────────────────────────────
-
-const LESSONS = [
-  {
-    id: 0,
-    title: "O problema do dinheiro digital",
-    icon: "💡",
-    desc: "Por que precisávamos de uma solução",
-    xp: 10,
-    color: "#1e2a4a",
-    content: `
-      <span class="lesson-icon">💡</span>
-      <div class="lesson-title">O problema do dinheiro digital</div>
-      <div class="lesson-body">
-        Antes do Bitcoin, qualquer transferência de dinheiro online precisava de um
-        <strong style="color:#e8eaf6">intermediário</strong> — um banco ou fintech.
-        Sem ele, como garantir que alguém não gaste o mesmo dinheiro duas vezes?
-        <br><br>
-        Esse problema é chamado de <em>double spending</em>. Era o grande obstáculo
-        para criar dinheiro verdadeiramente digital.
-      </div>
-      <div class="lesson-hl">
-        &#8220;O que precisamos é um sistema de pagamento eletrônico baseado em
-        prova criptográfica, não em confiança.&#8221; — White Paper do Bitcoin, 2008
-      </div>
-      <div class="lesson-body">
-        Satoshi Nakamoto publicou o White Paper em 31 de outubro de 2008,
-        propondo uma solução: um registro público, distribuído e imutável.
-      </div>
-    `,
-    quiz: {
-      q: "Qual era o principal problema que o Bitcoin precisava resolver?",
-      opts: [
-        "Tornar transações mais rápidas que o Pix",
-        "Evitar o gasto duplo sem usar um banco",
-        "Criar moeda física segura",
-        "Substituir o cartão de crédito"
-      ],
-      c: 1,
-      fb: "Exato! O double spending era o obstáculo central. Sem resolvê-lo, dinheiro digital genuíno era impossível."
-    }
-  },
-  {
-    id: 1,
-    title: "O que é Blockchain",
-    icon: "⛓️",
-    desc: "O livro-caixa público e imutável",
-    xp: 15,
-    color: "#1a1e35",
-    content: `
-      <span class="lesson-icon">⛓️</span>
-      <div class="lesson-title">O que é Blockchain</div>
-      <div class="lesson-body">
-        Imagine um caderno onde qualquer pessoa pode escrever, mas ninguém pode
-        apagar o que já foi escrito. Esse é o conceito central de uma blockchain.
-      </div>
-      <div class="lesson-hl">
-        Blockchain = cadeia de blocos. Cada bloco contém transações + o hash
-        (impressão digital) do bloco anterior. Alterar qualquer bloco invalida
-        todos os seguintes.
-      </div>
-      <div class="lesson-body">
-        Esse caderno é copiado em milhares de computadores ao redor do mundo.
-        Para fraudar, você precisaria alterar mais de 50% de todos eles
-        simultaneamente — praticamente impossível.
-      </div>
-    `,
-    quiz: {
-      q: "O que torna a blockchain segura contra fraudes?",
-      opts: [
-        "Um servidor central poderoso",
-        "Hashes encadeados + rede distribuída",
-        "Criptografia só no app",
-        "Senhas de 32 caracteres"
-      ],
-      c: 1,
-      fb: "Correto! Hashes encadeados + distribuição da rede é o que torna alterações praticamente impossíveis."
-    }
-  },
-  {
-    id: 2,
-    title: "Bitcoin: a primeira moeda",
-    icon: "₿",
-    desc: "Ouro digital e escassez programada",
-    xp: 20,
-    color: "#2a1a05",
-    content: `
-      <span class="lesson-icon">₿</span>
-      <div class="lesson-title">Bitcoin: a primeira moeda</div>
-      <div class="lesson-body">
-        Em 3 de janeiro de 2009, Satoshi minerou o primeiro bloco — o
-        <em>Genesis Block</em>. O Bitcoin nasceu com uma regra fixada no código:
-        nunca mais de 21 milhões de BTC existirão.
-      </div>
-      <div class="lesson-hl">
-        Bitcoin é como ouro digital. Escasso por design, sem banco central para
-        inflacionar a oferta. Isso é chamado de política monetária programada.
-      </div>
-      <div class="lesson-body">
-        A <strong style="color:#e8eaf6">mineração</strong> é o processo de criação
-        de novos bitcoins: computadores competem para resolver cálculos e recebem
-        recompensas. A cada ~4 anos ocorre o <em>halving</em> — a recompensa cai
-        pela metade.
-      </div>
-    `,
-    quiz: {
-      q: "Qual é o limite máximo de bitcoins que existirão?",
-      opts: ["100 milhões", "21 milhões", "1 bilhão", "Sem limite"],
-      c: 1,
-      fb: "Certo! 21 milhões é o limite fixado no código. Essa escassez é uma das bases do valor do BTC."
-    }
-  },
-  {
-    id: 3,
-    title: "Ethereum e Smart Contracts",
-    icon: "🔷",
-    desc: "Programas que rodam na blockchain",
-    xp: 20,
-    color: "#0d1a30",
-    content: `
-      <span class="lesson-icon">🔷</span>
-      <div class="lesson-title">Ethereum e Smart Contracts</div>
-      <div class="lesson-body">
-        Em 2015, Vitalik Buterin lançou o Ethereum com uma ideia revolucionária:
-        e se a blockchain pudesse executar <em>programas</em>, não apenas registrar
-        transações?
-      </div>
-      <div class="lesson-hl">
-        Smart contracts são contratos autoexecutáveis em código. Sem intermediários:
-        se A for verdadeiro, execute B. Automático, transparente, imutável.
-      </div>
-      <div class="lesson-body">
-        O Ethereum foi construído do zero com nova arquitetura. Usa Ether (ETH)
-        como combustível (gas) para executar contratos. Abriu as portas para DeFi,
-        NFTs e muito mais.
-      </div>
-    `,
-    quiz: {
-      q: "O que diferencia o Ethereum do Bitcoin fundamentalmente?",
-      opts: [
-        "ETH é mais barato de minerar",
-        "Suporta contratos inteligentes programáveis",
-        "Bitcoin usa blockchain diferente",
-        "ETH tem mais moedas"
-      ],
-      c: 1,
-      fb: "Correto! Os smart contracts transformaram a blockchain num computador distribuído."
-    }
-  },
-  {
-    id: 4,
-    title: "BNB e Solana",
-    icon: "🟡",
-    desc: "Velocidade e ecossistemas alternativos",
-    xp: 15,
-    color: "#1a1005",
-    content: `
-      <span class="lesson-icon">🟡</span>
-      <div class="lesson-title">BNB e Solana</div>
-      <div class="lesson-body">
-        <strong style="color:#e8eaf6">BNB</strong> nasceu em 2017 como token da
-        Binance. Tornou-se a moeda nativa da BNB Chain — compatível com Ethereum,
-        mais rápida e com taxas menores, porém mais centralizada.
-      </div>
-      <div class="lesson-hl">
-        BNB Chain: compatível com Ethereum. Solana: até 65.000 transações por
-        segundo, taxas de centavos.
-      </div>
-      <div class="lesson-body">
-        <strong style="color:#e8eaf6">Solana</strong> surgiu em 2020 com
-        <em>Proof of History</em> (PoH) — um mecanismo que permite velocidade
-        extrema. É preferida para NFTs e jogos blockchain.
-      </div>
-    `,
-    quiz: {
-      q: "Qual inovação a Solana introduziu para alta velocidade?",
-      opts: [
-        "Proof of Work mais eficiente",
-        "Proof of History (PoH)",
-        "Fork do Ethereum",
-        "Sharding em camadas"
-      ],
-      c: 1,
-      fb: "Exato! Proof of History é o que permite até 65.000 transações por segundo."
-    }
-  },
-  {
-    id: 5,
-    title: "Chainlink e Oráculos",
-    icon: "🔗",
-    desc: "Conectando blockchain ao mundo real",
-    xp: 15,
-    color: "#05101a",
-    content: `
-      <span class="lesson-icon">🔗</span>
-      <div class="lesson-title">Chainlink e Oráculos</div>
-      <div class="lesson-body">
-        Smart contracts têm um problema: não conseguem acessar dados do mundo
-        real sozinhos. Como um contrato sabe o preço do BTC para liquidar uma
-        aposta?
-      </div>
-      <div class="lesson-hl">
-        Oráculos levam dados externos (preços, resultados) para dentro da
-        blockchain. Chainlink (LINK) é o oráculo descentralizado mais usado
-        no mundo.
-      </div>
-      <div class="lesson-body">
-        Com Chainlink, um smart contract pode consultar o preço real de um ativo
-        ou qualquer dado externo — de forma segura, sem depender de uma fonte
-        centralizada.
-      </div>
-    `,
-    quiz: {
-      q: "Para que serve um oráculo como o Chainlink?",
-      opts: [
-        "Minerar novos tokens LINK",
-        "Levar dados externos para a blockchain",
-        "Criar nova blockchain mais rápida",
-        "Substituir exchanges centralizadas"
-      ],
-      c: 1,
-      fb: "Correto! Oráculos são a ponte entre o mundo real e os smart contracts."
-    }
-  },
-  {
-    id: 6,
-    title: "Uniswap e DeFi",
-    icon: "🦄",
-    desc: "Exchanges sem intermediários",
-    xp: 20,
-    color: "#1a052a",
-    content: `
-      <span class="lesson-icon">🦄</span>
-      <div class="lesson-title">Uniswap e DeFi</div>
-      <div class="lesson-body">
-        <strong style="color:#e8eaf6">DeFi</strong> (Finanças Descentralizadas)
-        são protocolos financeiros em blockchain, sem bancos centrais. Empréstimos,
-        trocas, juros — tudo em código.
-      </div>
-      <div class="lesson-hl">
-        Uniswap é uma DEX (exchange descentralizada). Usa pools de liquidez:
-        qualquer pessoa deposita pares de tokens e ganha taxas das trocas.
-      </div>
-      <div class="lesson-body">
-        O token UNI dá direito de governança — quem possui UNI vota nas mudanças
-        do protocolo. É o modelo DAO: empresa governada por código e seus usuários.
-      </div>
-    `,
-    quiz: {
-      q: "O que é uma DEX como o Uniswap?",
-      opts: [
-        "Corretora com sede física",
-        "Exchange descentralizada com pools de liquidez",
-        "Fundo de investimento em cripto",
-        "Oráculo de preços"
-      ],
-      c: 1,
-      fb: "Perfeito! DEX = exchange descentralizada. Sem conta obrigatória, sem custódia central."
-    }
-  },
-  {
-    id: 7,
-    title: "Tether, Stablecoins e Hyperliquid",
-    icon: "💲",
-    desc: "Estabilidade e o futuro do trading",
-    xp: 25,
-    color: "#051a10",
-    content: `
-      <span class="lesson-icon">💲</span>
-      <div class="lesson-title">Tether, Stablecoins e Hyperliquid</div>
-      <div class="lesson-body">
-        <strong style="color:#e8eaf6">Stablecoins</strong> resolvem a volatilidade:
-        são tokens ancorados a moedas tradicionais. O <em>Tether (USDT)</em> vale
-        sempre ~US$1 por ser lastreado em dólares reais.
-      </div>
-      <div class="lesson-hl">
-        USDT é a "ponte" do mercado cripto: permite sair de posições voláteis sem
-        converter para fiat. É a moeda mais negociada do mundo cripto.
-      </div>
-      <div class="lesson-body">
-        <strong style="color:#e8eaf6">Hyperliquid</strong> é um protocolo de
-        trading descentralizado de derivativos — futuros e perpétuos on-chain —
-        com performance comparável às grandes exchanges centralizadas.
-      </div>
-    `,
-    quiz: {
-      q: "Por que stablecoins como USDT são importantes?",
-      opts: [
-        "Rendem mais que Bitcoin",
-        "Eliminam volatilidade e servem como reserva estável",
-        "São mineradas como BTC",
-        "Substituem o Ethereum"
-      ],
-      c: 1,
-      fb: "Correto! Stablecoins são a cola do ecossistema DeFi."
-    }
-  }
-];
-
-const COINS = {
-  bitcoin:      { sym: "BTC",  label: "Bitcoin" },
-  ethereum:     { sym: "ETH",  label: "Ethereum" },
-  binancecoin:  { sym: "BNB",  label: "BNB" },
-  solana:       { sym: "SOL",  label: "Solana" },
-  chainlink:    { sym: "LINK", label: "Chainlink" },
-  uniswap:      { sym: "UNI",  label: "Uniswap" },
-  tether:       { sym: "USDT", label: "Tether" },
-  hyperliquid:  { sym: "HYPE", label: "Hyperliquid" }
-};
-
-// ─── STATE ───────────────────────────────────────────────────────────────────
-
-let S = { done: [], xp: 0, wallets: [], activeW: null, prices: {} };
-try {
-  const saved = localStorage.getItem('cgv2');
-  if (saved) S = { ...S, ...JSON.parse(saved) };
-} catch (e) {}
-
-let editingTxIdx = null;
-
-function save() {
-  try { localStorage.setItem('cgv2', JSON.stringify(S)); } catch (e) {}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-// ─── TABS ────────────────────────────────────────────────────────────────────
-
-function switchTab(t) {
-  document.querySelectorAll('.tab').forEach((b, i) =>
-    b.classList.toggle('active', (i === 0 && t === 'learn') || (i === 1 && t === 'wallet'))
-  );
-  document.getElementById('sc-learn').classList.toggle('active', t === 'learn');
-  document.getElementById('sc-wallet').classList.toggle('active', t === 'wallet');
-  if (t === 'wallet') renderWallets();
+:root {
+  --bg: #0a0b0f;
+  --bg2: #11131a;
+  --bg3: #181b25;
+  --border: #1e2333;
+  --purple: #7c5cfc;
+  --purple2: #a78bfa;
+  --green: #00e676;
+  --red: #ff5252;
+  --text: #e8eaf6;
+  --muted: #5c6280;
 }
 
-// ─── LEARN ───────────────────────────────────────────────────────────────────
-
-function renderTrail() {
-  const d = S.done.length;
-  document.getElementById('prog-label').textContent = d + ' de ' + LESSONS.length + ' módulos';
-  document.getElementById('xp-label2').textContent = S.xp + ' XP';
-  document.getElementById('xp-count').textContent = S.xp;
-  document.getElementById('xp-fill').style.width = (d / LESSONS.length * 100).toFixed(0) + '%';
-
-  document.getElementById('mods-wrap').innerHTML = LESSONS.map((l, i) => {
-    const isDone  = S.done.includes(l.id);
-    const locked  = i > 0 && !S.done.includes(LESSONS[i - 1].id);
-    const badge   = isDone
-      ? '<span class="mod-badge badge-done">✓ Concluído</span>'
-      : locked
-        ? '<span class="mod-badge badge-lock">🔒</span>'
-        : '<span class="mod-badge badge-new">Novo</span>';
-    return `
-      <div class="mod-card${isDone ? ' done' : ''}${locked ? ' locked' : ''}"
-           onclick="${locked ? '' : 'openLesson(' + l.id + ')'}">
-        <div class="mod-icon" style="background:${l.color}">${l.icon}</div>
-        <div class="mod-meta">
-          <div class="mod-title">${l.title}</div>
-          <div class="mod-sub">${l.desc}</div>
-        </div>
-        ${badge}
-      </div>`;
-  }).join('');
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
 }
 
-function openLesson(id) {
-  const l    = LESSONS[id];
-  const done = S.done.includes(id);
-
-  document.getElementById('trail-list').style.display  = 'none';
-  document.getElementById('lesson-view').style.display = 'block';
-
-  document.getElementById('lesson-content').innerHTML = l.content + `
-    <div class="quiz-box">
-      <div class="quiz-q">${l.quiz.q}</div>
-      <div class="quiz-opts">
-        ${l.quiz.opts.map((o, i) => `
-          <button class="qopt${done && i === l.quiz.c ? ' correct' : ''}"
-                  onclick="answerQ(${id}, ${i})">${o}</button>
-        `).join('')}
-      </div>
-      <div class="qfb${done ? ' show ok' : ''}" id="qfb">
-        ${done ? '✓ ' + l.quiz.fb : ''}
-      </div>
-    </div>
-    <button class="next-btn${done ? ' show' : ''}" id="next-btn"
-            onclick="nextLesson(${id})">
-      ${id < LESSONS.length - 1 ? 'Próximo módulo →' : '🎉 Trilha concluída!'}
-    </button>`;
+.app {
+  max-width: 500px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-function answerQ(lid, chosen) {
-  const l = LESSONS[lid];
-  if (S.done.includes(lid)) return;
-
-  document.querySelectorAll('.qopt').forEach((o, i) => {
-    o.classList.toggle('correct', i === l.quiz.c);
-    o.classList.toggle('wrong', i === chosen && chosen !== l.quiz.c);
-  });
-
-  const fb = document.getElementById('qfb');
-  const ok = chosen === l.quiz.c;
-  fb.className = 'qfb show ' + (ok ? 'ok' : 'fail');
-  fb.textContent = ok
-    ? '✓ ' + l.quiz.fb
-    : '✗ Não exatamente. A resposta correta está em verde.';
-
-  if (ok) {
-    S.done.push(lid);
-    S.xp += l.xp;
-    save();
-    document.getElementById('next-btn').className = 'next-btn show';
-  }
+/* ─── HEADER ─── */
+.hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px 0;
 }
 
-function nextLesson(id) {
-  const next = id + 1;
-  if (next < LESSONS.length) openLesson(next);
-  else backToTrail();
+.logo {
+  font-size: 18px;
+  font-weight: 500;
 }
 
-function backToTrail() {
-  document.getElementById('trail-list').style.display  = 'block';
-  document.getElementById('lesson-view').style.display = 'none';
-  renderTrail();
+.logo span {
+  color: var(--purple2);
 }
 
-// ─── WALLETS ─────────────────────────────────────────────────────────────────
-
-function renderWallets() {
-  const el = document.getElementById('wallet-list');
-  if (!S.wallets.length) {
-    el.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-icon">💼</div>
-        Nenhuma carteira ainda.<br>Crie a primeira!
-      </div>`;
-    return;
-  }
-  el.innerHTML = S.wallets.map((w, i) => {
-    const { inv, cur, pct } = calcPerf(w);
-    const pc   = pct >= 0 ? 'pos' : 'neg';
-    const sign = pct >= 0 ? '+' : '';
-    return `
-      <div class="w-item" onclick="openWallet(${i})">
-        <div class="w-name">${w.name}</div>
-        <div class="w-meta">USD · ${w.txs.length} transação(ões)</div>
-        ${w.txs.length
-          ? `<div class="w-perf ${pc}">${sign}${pct.toFixed(2)}% · US$ ${cur.toFixed(2)} atual</div>`
-          : ''}
-      </div>`;
-  }).join('');
+.hdr-pills {
+  display: flex;
+  gap: 8px;
 }
 
-function calcPerf(w) {
-  let inv = 0, cur = 0;
-  w.txs.forEach(tx => {
-    const p = S.prices[tx.coin] || 0;
-    inv += tx.price * tx.qty;
-    cur += p * tx.qty;
-  });
-  const pct = inv > 0 ? ((cur - inv) / inv * 100) : 0;
-  return { inv, cur, pct };
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
-function openWallet(i) {
-  S.activeW = i;
-  const w = S.wallets[i];
-  document.getElementById('wallet-list-view').style.display = 'none';
-  document.getElementById('wallet-detail').style.display    = 'block';
-  document.getElementById('d-name').textContent = w.name;
-  fetchPrices().then(() => { renderTxList(); renderChart(); });
-  stab('txs');
+.pill.xp {
+  color: var(--purple2);
 }
 
-function backWallets() {
-  document.getElementById('wallet-list-view').style.display = 'block';
-  document.getElementById('wallet-detail').style.display    = 'none';
-  renderWallets();
+/* ─── TABS ─── */
+.tabs {
+  display: flex;
+  padding: 14px 20px 0;
+  border-bottom: 1px solid var(--border);
 }
 
-function stab(t) {
-  document.querySelectorAll('.stab').forEach((b, i) =>
-    b.classList.toggle('active', (i === 0 && t === 'txs') || (i === 1 && t === 'chart'))
-  );
-  document.getElementById('st-txs').style.display   = t === 'txs'   ? 'block' : 'none';
-  document.getElementById('st-chart').style.display = t === 'chart' ? 'block' : 'none';
-  if (t === 'chart') renderChart();
+.tab {
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.2s;
 }
 
-// ─── PRICES ──────────────────────────────────────────────────────────────────
-
-async function fetchPrices() {
-  try {
-    const ids = Object.keys(COINS).join(',');
-    const res = await fetch(
-      'https://api.coingecko.com/api/v3/simple/price?ids=' + ids + '&vs_currencies=usd'
-    );
-    const data = await res.json();
-    Object.keys(data).forEach(k => { S.prices[k] = data[k].usd; });
-  } catch (e) {
-    Object.keys(COINS).forEach(k => { if (!S.prices[k]) S.prices[k] = 0; });
-  }
+.tab.active {
+  color: var(--purple2);
+  border-bottom-color: var(--purple);
 }
 
-// ─── TRANSACTIONS ─────────────────────────────────────────────────────────────
-
-function fmtDate(dt) {
-  if (!dt) return '';
-  try {
-    const d = new Date(dt);
-    return d.toLocaleDateString('pt-BR') + ' ' +
-           d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-  } catch (e) { return dt; }
+/* ─── SCREENS ─── */
+.screen {
+  display: none;
+  flex: 1;
+  padding: 20px 20px 80px;
+  overflow-y: auto;
 }
 
-function renderTxList() {
-  const w  = S.wallets[S.activeW];
-  const el = document.getElementById('tx-list-wrap');
-
-  if (!w.txs.length) {
-    el.innerHTML = `<div class="empty-state"><div class="empty-icon">📊</div>Sem transações ainda.</div>`;
-    return;
-  }
-
-  el.innerHTML = w.txs.map((tx, i) => {
-    const c   = COINS[tx.coin];
-    const p   = S.prices[tx.coin] || 0;
-    const cur = p * tx.qty;
-    const inv = tx.price * tx.qty;
-    const pct = inv > 0 ? ((cur - inv) / inv * 100) : 0;
-    const pc  = pct >= 0 ? 'pos' : 'neg';
-    const sign = pct >= 0 ? '+' : '';
-    return `
-      <div class="tx-card">
-        <div class="tx-top">
-          <div class="tx-coin-info">
-            <div class="coin-avatar">${c.sym.slice(0, 2)}</div>
-            <div>
-              <div class="tx-cname">${c.label} (${c.sym})</div>
-              <div class="tx-cmeta">${tx.qty} ${c.sym} · US$ ${tx.price.toFixed(2)}/un</div>
-            </div>
-          </div>
-          <div class="tx-right">
-            <div class="tx-val">US$ ${inv.toFixed(2)}</div>
-            <div class="tx-pct ${pc}">${sign}${pct.toFixed(1)}% · US$ ${cur.toFixed(2)}</div>
-          </div>
-        </div>
-        <div class="tx-date">📅 ${fmtDate(tx.date) || 'Data não informada'}</div>
-        <div class="tx-actions">
-          <button class="act-btn act-edit" onclick="editTx(${i})">✏️ Editar</button>
-          <button class="act-btn act-del"  onclick="delTx(${i})">🗑 Excluir</button>
-        </div>
-      </div>`;
-  }).join('');
+.screen.active {
+  display: block;
 }
 
-function editTx(i) {
-  editingTxIdx = i;
-  const tx = S.wallets[S.activeW].txs[i];
-  document.getElementById('tx-modal-title').textContent = 'Editar transação';
-  document.getElementById('tx-coin').value  = tx.coin;
-  document.getElementById('tx-price').value = tx.price;
-  document.getElementById('tx-qty').value   = tx.qty;
-  document.getElementById('tx-date').value  = tx.date || '';
-  openModal('modal-tx');
+.sec-label {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  font-weight: 500;
+  margin-bottom: 10px;
 }
 
-function delTx(i) {
-  if (!confirm('Excluir esta transação?')) return;
-  S.wallets[S.activeW].txs.splice(i, 1);
-  save();
-  renderTxList();
-  renderChart();
+/* ─── CARD ─── */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
 }
 
-async function saveTx() {
-  const coin  = document.getElementById('tx-coin').value;
-  const price = parseFloat(document.getElementById('tx-price').value);
-  const qty   = parseFloat(document.getElementById('tx-qty').value);
-  const date  = document.getElementById('tx-date').value;
-
-  if (!coin || isNaN(price) || isNaN(qty) || qty <= 0) return;
-
-  const tx = { coin, price, qty, date };
-
-  if (editingTxIdx !== null) {
-    S.wallets[S.activeW].txs[editingTxIdx] = tx;
-    editingTxIdx = null;
-  } else {
-    S.wallets[S.activeW].txs.push(tx);
-  }
-
-  save();
-  closeModal('modal-tx');
-
-  document.getElementById('tx-modal-title').textContent = 'Nova transação';
-  document.getElementById('tx-price').value = '';
-  document.getElementById('tx-qty').value   = '';
-  document.getElementById('tx-date').value  = '';
-
-  await fetchPrices();
-  renderTxList();
-  renderChart();
+.card + .card {
+  margin-top: 12px;
 }
 
-// ─── CHART ───────────────────────────────────────────────────────────────────
-
-function renderChart() {
-  const w              = S.wallets[S.activeW];
-  const { inv, cur, pct } = calcPerf(w);
-  const profit         = cur - inv;
-  const isPos          = profit >= 0;
-
-  const pctEl = document.getElementById('perf-pct');
-  pctEl.textContent = (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%';
-  pctEl.className   = 'perf-pct ' + (pct >= 0 ? 'pos' : 'neg');
-
-  document.getElementById('perf-sub').textContent = inv > 0
-    ? `Investido: US$ ${inv.toFixed(2)} · Atual: US$ ${cur.toFixed(2)}`
-    : 'Adicione transações para ver a performance';
-
-  const max = Math.max(inv, cur, 1);
-
-  document.getElementById('b-inv').style.width = (inv / max * 85 + 15).toFixed(0) + '%';
-  document.getElementById('v-inv').textContent = 'US$ ' + inv.toFixed(2);
-
-  const profPct = Math.abs(profit) / max * 85;
-  document.getElementById('b-prof').style.width   = (profPct + 15).toFixed(0) + '%';
-  document.getElementById('b-prof').className     = 'bar-fill ' + (isPos ? 'bar-profit' : 'bar-loss');
-  document.getElementById('v-prof').textContent   = (isPos ? '+ ' : '') + 'US$ ' + Math.abs(profit).toFixed(2);
-  document.getElementById('profit-lbl').textContent = isPos ? 'Lucro' : 'Prejuízo';
-  document.getElementById('leg-dot-p').className  = 'leg-dot ' + (isPos ? 'leg-profit' : 'leg-loss');
-  document.getElementById('leg-lbl-p').textContent = isPos ? 'Lucro' : 'Prejuízo';
-
-  document.getElementById('tx-breakdown').innerHTML = w.txs.map(tx => {
-    const c    = COINS[tx.coin];
-    const p    = S.prices[tx.coin] || 0;
-    const cur2 = p * tx.qty;
-    const inv2 = tx.price * tx.qty;
-    const pct2 = inv2 > 0 ? ((cur2 - inv2) / inv2 * 100) : 0;
-    const pc   = pct2 >= 0 ? 'pos' : 'neg';
-    const sign = pct2 >= 0 ? '+' : '';
-    return `
-      <div class="tx-card">
-        <div class="tx-top">
-          <div class="tx-coin-info">
-            <div class="coin-avatar">${c.sym.slice(0, 2)}</div>
-            <div>
-              <div class="tx-cname">${c.label}</div>
-              <div class="tx-cmeta">Aportado: US$ ${inv2.toFixed(2)}</div>
-            </div>
-          </div>
-          <div class="tx-right">
-            <div class="tx-val">US$ ${cur2.toFixed(2)}</div>
-            <div class="tx-pct ${pc}">${sign}${pct2.toFixed(1)}%</div>
-          </div>
-        </div>
-        <div class="tx-date">📅 ${fmtDate(tx.date) || 'Data não informada'}</div>
-      </div>`;
-  }).join('');
+/* ─── LEARN TRAIL ─── */
+.xp-bar-wrap {
+  margin-bottom: 20px;
 }
 
-// ─── MODALS ───────────────────────────────────────────────────────────────────
-
-function openModal(id)  { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-
-function saveWallet() {
-  const name = document.getElementById('w-name').value.trim();
-  if (!name) return;
-  S.wallets.push({ name, txs: [] });
-  save();
-  closeModal('modal-wallet');
-  document.getElementById('w-name').value = '';
-  renderWallets();
+.xp-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
 }
 
-// ─── INIT ────────────────────────────────────────────────────────────────────
+.xp-row span {
+  font-size: 12px;
+  color: var(--muted);
+}
 
-renderTrail();
+.xp-row strong {
+  font-size: 12px;
+  color: var(--purple2);
+}
+
+.xp-bar {
+  height: 4px;
+  background: var(--bg3);
+  border-radius: 2px;
+}
+
+.xp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--purple), var(--purple2));
+  border-radius: 2px;
+  transition: width 0.4s;
+}
+
+.mod-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.mod-card:hover {
+  border-color: var(--purple);
+}
+
+.mod-card.locked {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.mod-card.done {
+  border-color: #00e67633;
+}
+
+.mod-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.mod-meta {
+  flex: 1;
+}
+
+.mod-title {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.mod-sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.mod-badge {
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 10px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.badge-done {
+  background: #00e67615;
+  color: var(--green);
+  border: 1px solid #00e67630;
+}
+
+.badge-new {
+  background: #7c5cfc15;
+  color: var(--purple2);
+  border: 1px solid #7c5cfc30;
+}
+
+.badge-lock {
+  background: var(--bg3);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+/* ─── LESSON VIEW ─── */
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--purple2);
+  cursor: pointer;
+  background: none;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.lesson-icon {
+  font-size: 36px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.lesson-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.lesson-body {
+  font-size: 14px;
+  color: #94a3b8;
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.lesson-hl {
+  background: #7c5cfc12;
+  border-left: 3px solid var(--purple);
+  border-radius: 0 10px 10px 0;
+  padding: 12px 16px;
+  margin: 14px 0;
+  font-size: 13px;
+  color: var(--purple2);
+  line-height: 1.65;
+}
+
+.quiz-box {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.quiz-q {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.quiz-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.qopt {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #94a3b8;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.qopt:hover {
+  border-color: var(--purple);
+  color: var(--text);
+}
+
+.qopt.correct {
+  background: #00e67610;
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.qopt.wrong {
+  background: #ff525210;
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.qfb {
+  margin-top: 10px;
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  display: none;
+}
+
+.qfb.show { display: block; }
+.qfb.ok   { background: #00e67610; color: var(--green); }
+.qfb.fail { background: #ff525210; color: var(--red); }
+
+.next-btn {
+  position: fixed;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 460px;
+  padding: 15px;
+  background: var(--purple);
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 0 -4px 24px rgba(124, 92, 252, 0.35);
+  transition: bottom 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.next-btn.show {
+  bottom: 24px;
+}
+
+.next-btn-spacer {
+  display: none;
+  height: 72px;
+  margin-top: 14px;
+}
+
+.next-btn-spacer.show {
+  display: block;
+}
+
+/* ─── WALLET ─── */
+.wallet-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.wallet-topbar h2 {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.btn-primary {
+  padding: 9px 18px;
+  background: var(--purple);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #6d4de8;
+}
+
+.w-item {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.w-item:hover {
+  border-color: var(--purple);
+}
+
+.w-name {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.w-meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.w-perf {
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.pos { color: var(--green); }
+.neg { color: var(--red); }
+
+/* ─── SUBTABS ─── */
+.stabs {
+  display: flex;
+  background: var(--bg3);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 20px;
+}
+
+.stab {
+  flex: 1;
+  padding: 9px 0;
+  border-radius: 9px;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  color: var(--muted);
+  transition: all 0.2s;
+}
+
+.stab.active {
+  background: var(--bg2);
+  color: var(--purple2);
+  border: 1px solid var(--border);
+}
+
+/* ─── FORM INPUTS ─── */
+.field-label {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 5px;
+  letter-spacing: 0.5px;
+}
+
+.finput {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 14px;
+  color: var(--text);
+  font-size: 14px;
+  margin-bottom: 12px;
+  outline: none;
+}
+
+.finput:focus {
+  border-color: var(--purple);
+}
+
+.finput::placeholder {
+  color: #2e3452;
+}
+
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* ─── TRANSACTION CARDS ─── */
+.tx-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 8px;
+}
+
+.tx-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.tx-coin-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.coin-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--purple);
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.tx-cname {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tx-cmeta {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.tx-right {
+  text-align: right;
+}
+
+.tx-val {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tx-pct {
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.tx-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+
+.act-btn {
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.act-edit { color: var(--purple2); }
+.act-edit:hover { border-color: var(--purple); background: #7c5cfc15; }
+
+.act-del { color: var(--red); }
+.act-del:hover { border-color: var(--red); background: #ff525215; }
+
+.tx-date {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* ─── PERFORMANCE CHART ─── */
+.perf-header {
+  margin-bottom: 20px;
+}
+
+.perf-pct {
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.perf-sub {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.bar-section {
+  margin-bottom: 8px;
+}
+
+.bar-lbl {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+
+.bar-track {
+  height: 54px;
+  background: var(--bg3);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding-left: 14px;
+  min-width: 60px;
+  transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bar-invested { background: linear-gradient(90deg, #1a2255, #243080); }
+.bar-profit   { background: linear-gradient(90deg, #0a3320, #0d5c34); }
+.bar-loss     { background: linear-gradient(90deg, #3a0a0a, #6b1010); }
+
+.bar-val {
+  font-size: 13px;
+  font-weight: 500;
+  color: #e2e8f0;
+  white-space: nowrap;
+}
+
+.bar-legend {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.leg-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.leg-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.leg-invested { background: #243080; }
+.leg-profit   { background: #0d5c34; }
+.leg-loss     { background: #6b1010; }
+
+/* ─── EMPTY STATE ─── */
+.empty-state {
+  text-align: center;
+  padding: 36px 20px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.empty-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+/* ─── ADD TX BUTTON ─── */
+.add-tx-btn {
+  width: 100%;
+  padding: 13px;
+  background: transparent;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s;
+}
+
+.add-tx-btn:hover {
+  border-color: var(--purple);
+  color: var(--purple2);
+}
+
+/* ─── MODALS ─── */
+.modal-bg {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 200;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.modal-bg.open {
+  display: flex;
+}
+
+.modal {
+  background: var(--bg2);
+  border-radius: 20px 20px 0 0;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  padding: 24px 20px 40px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.modal h3 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+
+.m-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.m-cancel {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid var(--border);
+  background: transparent;
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.m-save {
+  flex: 2;
+  padding: 12px;
+  background: var(--purple);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
