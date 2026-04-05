@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
- 
+
 <div class="app">
   <div class="hdr">
     <div class="logo">Crypto<span>Guia</span></div>
@@ -16,12 +16,12 @@
       <div class="pill xp">⚡ <span id="xp-count">0</span> XP</div>
     </div>
   </div>
- 
+
   <div class="tabs">
     <div class="tab active" onclick="switchTab('learn')">Aprender</div>
     <div class="tab" onclick="switchTab('wallet')">Carteira</div>
   </div>
- 
+
   <!-- LEARN -->
   <div class="screen active" id="sc-learn">
     <div id="trail-list">
@@ -35,11 +35,11 @@
       <div id="mods-wrap"></div>
     </div>
     <div id="lesson-view" style="display:none;">
-      <button class="back-btn" onclick="backToTrail()">← Trilha</button>
+      <button class="back-btn" onclick="backToTrail()">&#8592; Trilha</button>
       <div id="lesson-content"></div>
     </div>
   </div>
- 
+
   <!-- WALLET -->
   <div class="screen" id="sc-wallet">
     <div id="wallet-list-view">
@@ -49,14 +49,14 @@
       </div>
       <div id="wallet-list">
         <div class="empty-state">
-          <div class="empty-icon">💼</div>
+          <div class="empty-icon">&#128181;</div>
           Nenhuma carteira ainda.<br>Crie a primeira!
         </div>
       </div>
     </div>
- 
+
     <div id="wallet-detail" style="display:none;">
-      <button class="back-btn" onclick="backWallets()">← Carteiras</button>
+      <button class="back-btn" onclick="backWallets()">&#8592; Carteiras</button>
       <div style="margin-bottom:16px;">
         <div style="font-size:19px;font-weight:500;" id="d-name"></div>
         <div style="font-size:12px;color:var(--muted);margin-top:2px;">Referência: USD (Dólar)</div>
@@ -65,21 +65,22 @@
         <button class="stab active" onclick="stab('txs')">Transações</button>
         <button class="stab" onclick="stab('chart')">Performance</button>
       </div>
- 
-      <!-- SUBTAB: TRANSAÇÕES -->
+
       <div id="st-txs">
         <div id="tx-list-wrap">
-          <div class="empty-state"><div class="empty-icon">📊</div>Sem transações ainda.</div>
+          <div class="empty-state">
+            <div class="empty-icon">&#128202;</div>
+            Sem transações ainda.
+          </div>
         </div>
         <button class="add-tx-btn" onclick="openModal('modal-tx')">+ Adicionar transação</button>
       </div>
- 
-      <!-- SUBTAB: PERFORMANCE -->
+
       <div id="st-chart" style="display:none;">
         <div class="card">
           <div class="perf-header">
             <div class="sec-label">PERFORMANCE DA CARTEIRA</div>
-            <div class="perf-pct" id="perf-pct">—</div>
+            <div class="perf-pct" id="perf-pct">&#8212;</div>
             <div class="perf-sub" id="perf-sub">Adicione transações para ver a performance</div>
           </div>
           <div class="bar-section">
@@ -111,7 +112,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- MODAL: NOVA CARTEIRA -->
 <div class="modal-bg" id="modal-wallet">
   <div class="modal">
@@ -124,7 +125,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- MODAL: TRANSAÇÃO -->
 <div class="modal-bg" id="modal-tx">
   <div class="modal">
@@ -158,8 +159,7 @@
     </div>
   </div>
 </div>
- 
+
 <script src="script.js"></script>
 </body>
 </html>
- 
